@@ -7,8 +7,8 @@ const router = express.Router()
 let customerController:CustomerController;
 
 // Example route to get all users
-router.post('/save', (req:Request, res:Response) => {
-   let retorno = customerController.save(req) 
+router.post('/save', async (req:Request, res:Response) => {
+   let retorno = await customerController.save(req) 
    res.status(200).json(retorno)
 });
 

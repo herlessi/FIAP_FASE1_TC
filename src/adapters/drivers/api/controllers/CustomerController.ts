@@ -10,7 +10,7 @@ export default class CustomerController{
         this.repo = repo
     }
 
-    save(req:Request):any{
+    async save(req:Request):any{
 
         let data = req.body
         if(!data){
@@ -35,9 +35,8 @@ export default class CustomerController{
         
         
         const customerSaveService = new CustomerSaveService(this.repo)
-        customerSaveService.execute(new UserCostumer(null, data.nome, data.email,null,1,null,null,null))
-        
-        return "DSAFAOFJSAFDKSD0"
+        let retorno = await customerSaveService.execute(new UserCostumer(null, data.nome, data.email,null,1,null,null,null))
+        return retorno
     }
        
    

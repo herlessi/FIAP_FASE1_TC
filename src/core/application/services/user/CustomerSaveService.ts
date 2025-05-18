@@ -1,8 +1,9 @@
 import CustomerRepositoryPG from "../../../../adapters/drivens/repository/postgres/CustomerRepositoryPG";
+import AUser from "../../../domain/Abstracts/AUser";
 import UserCostumer from "../../../domain/UserCostumer";
 import IService from "../../ports/in/InServices";
 
-export default class CustomerSaveService implements IService<UserCostumer,string>{
+export default class CustomerSaveService implements IService<UserCostumer,boolean>{
 
     repo: CustomerRepositoryPG;
 
@@ -10,12 +11,11 @@ export default class CustomerSaveService implements IService<UserCostumer,string
         this.repo = repo
     }
        
-    execute(
+    async execute(
         data:UserCostumer
-    ): string {
+    ): boolean {
 
-        this.repo.save(data)
-        return
+        return this.repo.save(data)
         
     }
 
