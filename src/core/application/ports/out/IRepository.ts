@@ -1,4 +1,4 @@
-import AUser from "../../../domain/Abstracts/AUser";
+import AUser from "../../../domain/shared/Abstracts/AUser";
 
 export default interface IRepository{
     save(user:AUser):boolean;

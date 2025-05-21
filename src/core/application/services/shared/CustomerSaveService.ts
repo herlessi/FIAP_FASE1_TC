@@ -1,5 +1,5 @@
 import CustomerRepositoryPG from "../../../../adapters/drivens/repository/postgres/CustomerRepositoryPG";
-import AUser from "../../../domain/Abstracts/AUser";
+import AUser from "../../../domain/shared/Abstracts/AUser";
 import UserCostumer from "../../../domain/UserCostumer";
 import IService from "../../ports/in/InServices";
 

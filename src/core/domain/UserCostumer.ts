@@ -1,5 +1,5 @@
-import AUser from "./Abstracts/AUser";
-import UserType from "./Enums/EnumUserTypes";
+import AUser from "./shared/Abstracts/AUser";
+import UserType from "./shared/Enums/EnumUserTypes";
 
 
 export default class UserCostumer extends AUser{

@@ -1,4 +1,4 @@
-import AUser from "../../../domain/Abstracts/AUser";
+import AUser from "../../../domain/shared/Abstracts/AUser";
 import IService from "../../ports/in/InServices";
 
 export default class SUserAuth implements IService<any, any>{
