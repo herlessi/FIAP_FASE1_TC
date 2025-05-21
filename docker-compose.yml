@@ -1,0 +1,37 @@
+#version: "3.9"
+services:
+  node:
+    build:
+      context: .
+      args:
+        PORTA: 8080
+    container_name: node_teste
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - teste-bridge 
+    # command: "nodemon -L index.js"
+    command: "npm run dev"
+    depends_on:
+      - banco
+  
+  banco:
+    image: postgres:11
+    container_name: postgres
+    ports:
+      - 5432:5432
+    networks:
+      - teste-bridge 
+    environment:
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - ./banco-volume:/var/lib/postgresql/data
+    
+      
+
+networks:
+  teste-bridge:
+    driver: bridge
