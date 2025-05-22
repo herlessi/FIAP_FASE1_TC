@@ -2,20 +2,19 @@ import CustomerRepositoryPG from "../../../../adapters/drivens/repository/postgr
 import AUser from "../../../domain/shared/Abstracts/AUser";
 import UserCostumer from "../../../domain/UserCostumer";
 import IService from "../../ports/in/InServices";
+import IRepository from "../../ports/out/IRepository";
 
 export default class CustomerSaveService implements IService<UserCostumer,boolean>{
 
-    repo: CustomerRepositoryPG;
+    repo: IRepository;
 
-    constructor(repo:CustomerRepositoryPG){
+    constructor(repo:IRepository){
         this.repo = repo
     }
        
-    async execute(
-        data:UserCostumer
-    ): boolean {
+    async execute(data:UserCostumer): boolean {
 
-        return this.repo.save(data)
+        return this.repo.save({nome:data.nome,email:data.email})
         
     }
 

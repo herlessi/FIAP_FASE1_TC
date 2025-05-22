@@ -28,7 +28,7 @@ services:
     environment:
       POSTGRES_PASSWORD: admin
     volumes:
-      - ./banco-volume:/var/lib/postgresql/data
+      - ./bancovolume:/var/lib/postgresql/data
     
       
 

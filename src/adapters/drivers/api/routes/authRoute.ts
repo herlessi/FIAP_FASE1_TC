@@ -8,8 +8,18 @@ let authController:AuthController;
 
 
 router.post('/login', async (req:Request, res:Response) => {
-   let retorno = await authController.login(req) 
-   res.status(200).json(retorno)
+   let returnData = await authController.login(req) 
+   res.status(200).json(returnData)
+});
+
+router.post('/anonymouslogin', async (req:Request, res:Response) => {
+   let returnData = await authController.anonymouslogin() 
+   res.status(200).json(returnData)
+});
+
+router.post('/newcostumer', async (req:Request, res:Response) => {
+   let returnData = await authController.newcostumer(req) 
+   res.status(200).json(returnData)
 });
 
 

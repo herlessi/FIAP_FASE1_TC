@@ -1,5 +1,5 @@
 import IRepository from "../../../../core/application/ports/out/IRepository";
-import CustomerSaveService from "../../../../core/application/services/shared/CustomerSaveService";
+import CustomerSaveService from "../../../../core/application/services/authentication/CustomerSaveService";
 import UserCostumer from "../../../../core/domain/UserCostumer";
 
 export default class CustomerController{

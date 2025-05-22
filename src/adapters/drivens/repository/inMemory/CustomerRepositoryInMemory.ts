@@ -1,7 +1,7 @@
 import IRepository from "../../../../core/application/ports/out/IRepository";
 import AUser from "../../../../core/domain/shared/Abstracts/AUser";
 
-export default class CustomerRepositoryPG implements IRepository{
+export default class CustomerRepositoryInMemory implements IRepository{
     
     private userList:Array<AUser> = []
 
@@ -14,7 +14,7 @@ export default class CustomerRepositoryPG implements IRepository{
     }
 
     list(user: Object): Array<AUser> {
-        return this.userList  
+        return this.userList 
     }
- 
+
 }

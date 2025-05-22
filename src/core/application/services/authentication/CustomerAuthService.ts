@@ -1,14 +1,13 @@
-import CustomerRepositoryPG from "../../../../adapters/drivens/repository/postgres/CustomerRepositoryPG";
 import IService from "../../ports/in/InServices";
-require('dotenv').config()
 import jwt from 'jsonwebtoken';
+import IRepository from "../../ports/out/IRepository";
 
 export default class CostumerAuthService implements IService<Object,Object>{
 
-    repo: CustomerRepositoryPG;
+    repo: IRepository;
     private JWT_SECRET:string = process.env.JWT_SECRET
 
-    constructor(repo:CustomerRepositoryPG){
+    constructor(repo:IRepository){
         this.repo = repo
     }
        
