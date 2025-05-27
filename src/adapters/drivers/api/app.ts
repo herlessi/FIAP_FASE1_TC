@@ -9,6 +9,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const iniciarDB = require('../../../scripts/iniciarDB');
+
 
 const app = express();
 // carregado via docker compose

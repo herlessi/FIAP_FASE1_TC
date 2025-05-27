@@ -29,7 +29,8 @@ services:
       POSTGRES_PASSWORD: admin
     volumes:
       - ./bancovolume:/var/lib/postgresql/data
-    
+      
+  
       
 
 networks:
