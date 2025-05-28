@@ -1,6 +1,6 @@
 import IService from "../../ports/in/InServices";
-import jwt from 'jsonwebtoken';
 import IRepository from "../../ports/out/IRepository";
+import Authentication from "../../../domain/authentication/Authentication";
 
 export default class CostumerAuthService implements IService<Object,Object>{
 
@@ -13,28 +13,66 @@ export default class CostumerAuthService implements IService<Object,Object>{
        
     async execute(data:Object): Object {
 
-        console.log('data ',data)
-        const payload = data
-        const expiresIn = '1h'
-        let retorno = {
-                    status: 500,
-                    message: "Erro ao gerar token"
-                }
-        await jwt.sign(payload, this.JWT_SECRET, { expiresIn }, (err, token) => {
-            if (err) {
-                retorno = {
-                    status: 500,
-                    message: "Erro ao gerar token"
-                }
-            } else {
-                retorno = {
-                    status: 200,
-                    token: token
+        
+        let datareturned = null
+        let logwithdata = false
+        if(data.cpf){
+            logwithdata = true
+            datareturned = await this.repo.list({cpf:data.cpf})
+        }else{
+            if(data.email && !data.name){
+                logwithdata = true
+                datareturned = await this.repo.list({email:data.email, name:data.name})
+            }
+        }
+       
+        const auth = new Authentication(this.repo)
+        let retorno = null
+        if(logwithdata == true){
+            if(datareturned?.length > 0){
+                retorno = await auth.authenticate(datareturned[0])
+            }else{
+                return {
+                    status: 400,
+                    message: "Usuário não encontrado"
                 }
             }
-        })
+        }else{
+            let newuser = await auth.createAnonymousUser(data.anonymousid)
+            if(newuser?.length > 0){
+                retorno = await auth.authenticate(newuser[0])
+            }else{
+                return {
+                    status: 400,
+                    message: "Usuário não encontrado"
+                }
+            }
+        }
 
-        return retorno
+        return retorno 
+
+        // console.log('data ',data)
+        // const payload = data
+        // const expiresIn = '1h'
+        // let retorno = {
+        //             status: 500,
+        //             message: "Erro ao gerar token"
+        //         }
+        // await jwt.sign(payload, this.JWT_SECRET, { expiresIn }, (err, token) => {
+        //     if (err) {
+        //         retorno = {
+        //             status: 500,
+        //             message: "Erro ao gerar token"
+        //         }
+        //     } else {
+        //         retorno = {
+        //             status: 200,
+        //             token: token
+        //         }
+        //     }
+        // })
+
+        // return retorno
         
     }
 

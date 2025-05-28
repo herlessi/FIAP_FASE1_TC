@@ -1,0 +1,312 @@
+openapi: 3.0.1
+info:
+  title: API FIAP LOJA
+  description: API do tech challenger da FASE 1 - Arquitetura de Softwares - FIAP.
+  version: 0.0.1
+  # termsOfService: https://mockapi.io
+  contact:
+    name: Herlessi Nogueira Bezerra
+    email: herlessi@gmail.com
+    url: https://mockapi.io
+  license:
+    name: "Lincença: GPLv3"
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+externalDocs:
+  description: Documentação burocrática
+  url: https://mockapi.io
+
+servers:
+- url: http://localhost:8080/
+  description: API de Teste
+
+paths:
+  /auth/login:
+    post:
+      summary: Login por CPF
+      tags:
+        - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cpf:
+                  type: string
+                  example: "12345678909"
+                name:
+                  type: string
+                  example: "nome da silva"
+                email:
+                  type: string
+                  example: "nome@email.com"
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Erro
+          content:
+            application/json:
+              schema:
+                type: object
+  /auth/anonymouslogin:
+    post:
+      summary: Login Anonimo
+      tags:
+        - auth
+      description: Login sem autenticação
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Erro
+          content:
+            application/json:
+              schema:
+                type: object
+  /customer:
+    get:
+      summary: Recupera todos os clientes
+      tags:
+        - customer
+      security:
+        - auth: []
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      summary: Cria um novo cliente
+      tags:
+        - customer
+      security:
+        - auth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cpf:
+                  type: string
+                  example: "12345678909"
+                name:
+                  type: string
+                  example: "nome da silva"
+                email:
+                  type: string
+                  example: "email@email.com"
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+  /order:
+    get:
+      summary: Recupera todos os pedidos
+      tags:
+        - order
+      security:
+        - auth: []
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      summary: Cria um novo pedido
+      tags:
+        - order
+      security:
+        - auth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customerId:
+                  type: string
+                  example: "12345678909"
+                items:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      productId:
+                        type: string
+                        example: "prod123"
+                      quantity:
+                        type: integer
+                        example: 2
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+  /order/categories:
+    get:
+      summary: Recupera todas as categorias de pedidos
+      tags:
+        - order
+      security:
+        - auth: []
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+  /order/categories/{id}/products:
+    get:
+      summary: Recupera todas os produtos da categoria
+      tags:
+        - order
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: ID da categoria
+      security:
+        - auth: []
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+  /order/categories/products/{id}:
+    get:
+      summary: Lista um produto especifico
+      tags:
+        - order
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: ID da categoria
+      security:
+        - auth: []
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+  /order/cart/addproduct:
+    post:
+        summary: Adiciona um produto no carrinho
+        tags:
+          - order
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  product_id:
+                    type: number
+                    example: "1"
+                  quantity:
+                    type: number
+                    example: "1"
+        security:
+          - auth: []
+        responses:
+          200:
+            description: Sucesso
+            content:
+              application/json:
+                schema:
+                  type: object
+  /order/cart/removeproduct:
+    delete:
+        summary: Remove um produto no carrinho
+        tags:
+          - order
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  product_id:
+                    type: number
+                    example: "1"
+                  order_id:
+                    type: number
+                    example: "1"
+        security:
+          - auth: []
+        responses:
+          200:
+            description: Sucesso
+            content:
+              application/json:
+                schema:
+                  type: object
+  /order/cart/{order_id}/products:
+    get:
+        summary: Lista produtos do carrinho
+        tags:
+          - order
+        parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: ID da ordem
+        security:
+          - auth: []
+        responses:
+          200:
+            description: Sucesso
+            content:
+              application/json:
+                schema:
+                  type: object
+components:
+  schemas:
+    responses:
+      200:
+        description: Sucesso
+        content:
+          application/json:
+            schema:
+              type: object
+      400:
+        description: Erro
+        content:
+          application/json:
+            schema:
+              type: object
+  securitySchemes:
+    auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

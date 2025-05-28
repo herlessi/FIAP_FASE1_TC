@@ -29,7 +29,7 @@ export default class AuthController {
         }
 
         const customerAuthService = new CustomerAuthService(this.repo)
-        let retorno = await customerAuthService.execute({cpf:data.cpf,nome:data.nome,email:data.email})
+        let retorno = await customerAuthService.execute({cpf:data.cpf,name:data.name,email:data.email})
         return retorno
     }
 
@@ -74,6 +74,7 @@ export default class AuthController {
 
 
         let token = req.headers['authorization']
+        token = token?.replace('Bearer ', '').trim()
         if (!token) {
             let retorno =  {
                 status: 400,

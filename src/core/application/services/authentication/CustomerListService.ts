@@ -1,10 +1,8 @@
-import CustomerRepositoryPG from "../../../../adapters/drivens/repository/postgres/CustomerRepositoryPG";
-import AUser from "../../../domain/shared/Abstracts/AUser";
 import UserCostumer from "../../../domain/UserCostumer";
 import IService from "../../ports/in/InServices";
 import IRepository from "../../ports/out/IRepository";
 
-export default class CustomerSaveService implements IService<UserCostumer,Promise<Array<Object>>>{
+export default class CustomerListService implements IService<UserCostumer,Promise<Array<Object>>>{
 
     repo: IRepository;
 
@@ -14,7 +12,7 @@ export default class CustomerSaveService implements IService<UserCostumer,Promis
        
     async execute(data:UserCostumer): Promise<Array<Object>> {
 
-        return this.repo.save({name:data.name,email:data.email,cpf:data.cpf})
+        return await this.repo.list({id:data.id,cpf:data.cpf,name:data.name,email:data.email})
         
     }
 

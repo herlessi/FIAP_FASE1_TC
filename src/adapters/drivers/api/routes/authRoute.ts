@@ -9,7 +9,7 @@ let authController:AuthController;
 
 router.post('/login', async (req:Request, res:Response) => {
    let returnData = await authController.login(req) 
-   res.status(200).json(returnData)
+   res.status(returnData.status).json(returnData)
 });
 
 router.post('/anonymouslogin', async (req:Request, res:Response) => {

@@ -1,6 +1,7 @@
 import IService from "../../ports/in/InServices";
 import jwt from 'jsonwebtoken';
 import IRepository from "../../ports/out/IRepository";
+import Authentication from "../../../domain/authentication/Authentication";
 
 export default class CostumerAuthVerifyService implements IService<string,Object>{
 
@@ -13,27 +14,9 @@ export default class CostumerAuthVerifyService implements IService<string,Object
        
     async execute(token:string): Object {
 
-        console.log('token ',token)
-        let retorno = {
-                    status: 500,
-                    message: "Não foi possivel verificar o token"
-                }
-        await jwt.verify(token, this.JWT_SECRET, (err, decoded) => {
-            if (err) {
-                retorno = {
-                    status: 500,
-                    message: "Não foi possivel verificar o token"
-                }
-            } else {
-                retorno = {
-                    status: 200,
-                    decoded: decoded
-                }
-            }
-        })
+        const auth = new Authentication()
+        return await auth.authorizate(token)
 
-        return retorno
-        
     }
 
 
