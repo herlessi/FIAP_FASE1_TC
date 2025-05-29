@@ -1,6 +1,7 @@
 import OrderRepositoryPG from "../../../../adapters/drivens/repository/postgres/OrderRepositoryPG";
 import IService from "../../ports/in/InServices";
 import IPaymentRepository from "../../ports/out/IPaymentRepository";
+import SetStatusOrderService from "./setStatusOrderService";
 
 export default class PaymentSaveService implements IService<Object,Promise<Array<Object>>>{
 
@@ -19,12 +20,14 @@ export default class PaymentSaveService implements IService<Object,Promise<Array
                 console.log('resp', resp)
                 console.log('----')
                 if(resp?.length > 0 && resp[0].fl_status == 1){
-                    const orderRepo = new OrderRepositoryPG()
-                    orderRepo.setOrderStatus({order_id:data.order_id,fl_status:2}).then(resp =>{
+
+                    const setStatusOrderService = SetStatusOrderService(new OrderRepositoryPG())
+                    setStatusOrderService.execute({order_id:data.order_id,fl_status:2}).then(resp =>{
                         resolve(resp)
                     }).catch(error =>{
                         reject(error)
                     })
+                    
                 }else{
                     reject({
                         code:400,
