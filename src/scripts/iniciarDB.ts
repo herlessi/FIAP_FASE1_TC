@@ -139,6 +139,30 @@ const iniciarDB = async () => {
             `)
 
 
+    await dbdev.raw(`CREATE TABLE IF NOT EXISTS public.order_status (
+                        id serial NOT NULL,
+                        name varchar NULL,
+                        CONSTRAINT order_status_unique UNIQUE (id)
+                    );
+            `)
+
+    await dbdev.raw(`INSERT INTO order_status(id,name)
+                    SELECT 1,'Registrado' WHERE NOT EXISTS (SELECT id FROM order_status WHERE name = 'Registrado' and id = 1)
+                    union all 
+                    SELECT 2,'Pago' WHERE NOT EXISTS (SELECT id FROM order_status WHERE name = 'Pago' and id =2)
+                    union all  
+                    SELECT 3,'Recebido' WHERE NOT EXISTS (SELECT id FROM order_status WHERE name = 'Recebido' and id = 3)
+                    union all 
+                    SELECT 4,'Em Preparação' WHERE NOT EXISTS (SELECT id FROM order_status WHERE name = 'Em Preparação' and id = 4)
+                    union all 
+                    SELECT 5,'Pronto' WHERE NOT EXISTS (SELECT id FROM order_status WHERE name = 'Pronto' and id = 5)
+                    union all 
+                    SELECT 6,'Finalizado' WHERE NOT EXISTS (SELECT id FROM order_status WHERE name = 'Finalizado' and id = 6)
+                    union all 
+                    SELECT 7,'Cancelado' WHERE NOT EXISTS (SELECT id FROM order_status WHERE name = 'Cancelado' and id = 7)
+                    `)      
+
+
 }
 
 iniciarDB();

@@ -89,7 +89,7 @@ export default class OrderRepositoryPG implements IOrderRepository{
 
     setOrderStatus(data: Object): Promise<Array<Object>> {
         return new Promise((resolve, reject) => {
-            this.dbpg('order').update({fl_status:data.fl_status}).where({id: data.order_id})
+            this.dbpg('order').update({fl_status:data.fl_status}).where({id: data.order_id}).returning('*')
             .then((rows: any) => {
                 resolve(Array.from(rows));
             }).catch((error: any) => {

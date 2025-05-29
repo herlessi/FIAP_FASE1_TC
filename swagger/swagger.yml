@@ -24,7 +24,7 @@ paths:
     post:
       summary: Login por CPF
       tags:
-        - auth
+        - Auth
       requestBody:
         content:
           application/json:
@@ -57,7 +57,7 @@ paths:
     post:
       summary: Login Anonimo
       tags:
-        - auth
+        - Auth
       description: Login sem autenticação
       responses:
         200:
@@ -76,7 +76,7 @@ paths:
     get:
       summary: Recupera todos os clientes
       tags:
-        - customer
+        - Customer
       security:
         - auth: []
       responses:
@@ -89,7 +89,7 @@ paths:
     post:
       summary: Cria um novo cliente
       tags:
-        - customer
+        - Customer
       security:
         - auth: []
       requestBody:
@@ -118,7 +118,7 @@ paths:
     get:
       summary: Recupera todos os pedidos
       tags:
-        - order
+        - Order
       security:
         - auth: []
       responses:
@@ -131,7 +131,7 @@ paths:
     post:
       summary: Cria um novo pedido
       tags:
-        - order
+        - Order
       security:
         - auth: []
       requestBody:
@@ -165,7 +165,7 @@ paths:
     get:
       summary: Recupera todas as categorias de pedidos
       tags:
-        - order
+        - Order
       security:
         - auth: []
       responses:
@@ -179,7 +179,7 @@ paths:
     get:
       summary: Recupera todas os produtos da categoria
       tags:
-        - order
+        - Order
       parameters:
         - name: id
           in: path
@@ -200,7 +200,7 @@ paths:
     get:
       summary: Lista um produto especifico
       tags:
-        - order
+        - Order
       parameters:
         - name: id
           in: path
@@ -221,7 +221,7 @@ paths:
     post:
         summary: Adiciona um produto no carrinho
         tags:
-          - order
+          - Order
         requestBody:
           content:
             application/json:
@@ -247,7 +247,7 @@ paths:
     delete:
         summary: Remove um produto no carrinho
         tags:
-          - order
+          - Order
         requestBody:
           content:
             application/json:
@@ -273,7 +273,7 @@ paths:
     get:
         summary: Lista produtos do carrinho
         tags:
-          - order
+          - Order
         parameters:
         - name: order_id
           in: path
@@ -372,6 +372,111 @@ paths:
               application/json:
                 schema:
                   type: object                  
+  /production/cancel/{order_id}:
+    get:
+      summary: Cancela um pedido
+      tags:
+        - Production
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: ID da Ordem de Pedido
+      security:
+        - auth: []
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+  /production/accept/{order_id}:
+    get:
+      summary: Aceita um pedido
+      tags:
+        - Production
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: ID da Ordem de Pedido
+      security:
+        - auth: []
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+  /production/preparation/{order_id}:
+    get:
+      summary: Pedido em preparação
+      tags:
+        - Production
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: ID da Ordem de Pedido
+      security:
+        - auth: []
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+  /production/ready/{order_id}:
+    get:
+      summary: Marcar um pedido como pronto
+      tags:
+        - Production
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: ID da Ordem de Pedido
+      security:
+        - auth: []
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+  /production/finish/{order_id}:
+    get:
+      summary: Finalizar um pedido
+      tags:
+        - Production
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: number
+          description: ID da Ordem de Pedido
+      security:
+        - auth: []
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
 components:
   schemas:
     responses:

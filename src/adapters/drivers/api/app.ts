@@ -7,6 +7,7 @@ import AuthController from "./controllers/AuthController";
 import CustomerController from "./controllers/CustomerController";
 import OrderController from "./controllers/OrderController";
 import PaymentController from "./controllers/PaymentController";
+import ProductionController from "./controllers/ProductionController";
 require('dotenv').config()
 
 const express = require('express');
@@ -43,7 +44,9 @@ const paymentrepo:IRepository = new PaymentRepositoryPG();
 const paymentctrl:PaymentController = new PaymentController(paymentrepo)
 app.use('/payment',require('./routes/paymentRoute')(paymentctrl,authCtrl));
 
-
+// orderrepo = aproveitando o repositorio do mesmo contexto
+const prodctrl:ProductionController = new ProductionController(orderrepo)
+app.use('/production',require('./routes/productionRoute')(prodctrl,authCtrl));
 
 // Inicia o servidor
 app.listen(PORT, () => {
