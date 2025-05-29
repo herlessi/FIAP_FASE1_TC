@@ -12,4 +12,5 @@ export default interface IOrderRepository{
     addProductToOrder(data:Object):Promise<Array<Object>>;
     removeProductToOrder(data:Object):Promise<Array<Object>>;
     getProductsFromOrder(data:Object):Promise<Array<Object>>;
+    setOrderStatus(data:Object):Promise<Array<Object>>;
 }

@@ -2,9 +2,11 @@ import IRepository from "../../../core/application/ports/out/IRepository";
 import CustomerRepositoryInMemory from "../../drivens/repository/inMemory/CustomerRepositoryInMemory";
 import CustomerRepositoryPG from "../../drivens/repository/postgres/CustomerRepositoryPG";
 import OrderRepositoryPG from "../../drivens/repository/postgres/OrderRepositoryPG";
+import PaymentRepositoryPG from "../../drivens/repository/postgres/PaymentRepositoryPG";
 import AuthController from "./controllers/AuthController";
 import CustomerController from "./controllers/CustomerController";
 import OrderController from "./controllers/OrderController";
+import PaymentController from "./controllers/PaymentController";
 require('dotenv').config()
 
 const express = require('express');
@@ -36,6 +38,10 @@ app.use('/customer', require('./routes/customerRoute')(ctrl,authCtrl));
 const orderrepo:IRepository = new OrderRepositoryPG();
 const orderctrl:OrderController = new OrderController(orderrepo)
 app.use('/order',require('./routes/orderRoute')(orderctrl,authCtrl));
+
+const paymentrepo:IRepository = new PaymentRepositoryPG();
+const paymentctrl:PaymentController = new PaymentController(paymentrepo)
+app.use('/payment',require('./routes/paymentRoute')(paymentctrl,authCtrl));
 
 
 

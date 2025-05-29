@@ -87,6 +87,18 @@ export default class OrderRepositoryPG implements IOrderRepository{
         })
     }
 
+    setOrderStatus(data: Object): Promise<Array<Object>> {
+        return new Promise((resolve, reject) => {
+            this.dbpg('order').update({fl_status:data.fl_status}).where({id: data.order_id})
+            .then((rows: any) => {
+                resolve(Array.from(rows));
+            }).catch((error: any) => {
+                console.error("Error listing products by category:", error); 
+                reject(false)
+            });
+        })
+    }
+
     getOrderByCustomerId(data: object): Promise<Array<Object>> {
         return new Promise((resolve, reject) => {
             this.dbpg('order').select('*').where({customer_id: data.customer_id})

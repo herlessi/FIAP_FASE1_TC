@@ -290,6 +290,88 @@ paths:
               application/json:
                 schema:
                   type: object
+  /payment/checkout:
+    post:
+        summary: Simula pagamento Aprovado
+        tags:
+          - Payment
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  order_id:
+                    type: number
+                    example: 1
+                  customer_id:
+                    type: number
+                    example: 1
+                  card_number:
+                    type: string
+                    example: "1111111111111111"
+                  month_expires:
+                    type: string
+                    example: "10"
+                  year_expires:
+                    type: string
+                    example: "25"
+                  cvv_expires:
+                    type: string
+                    example: "123"
+        security:
+          - auth: []
+        responses:
+          200:
+            description: Sucesso
+            content:
+              application/json:
+                schema:
+                  type: object
+  /payment/checkout/negado:
+    post:
+        summary: Simula pagamento Negado
+        tags:
+          - Payment
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  order_id:
+                    type: number
+                    example: 1
+                  customer_id:
+                    type: number
+                    example: 1
+                  card_number:
+                    type: string
+                    example: "0000000000000000"
+                  month_expires:
+                    type: string
+                    example: "10"
+                  year_expires:
+                    type: string
+                    example: "25"
+                  cvv_expires:
+                    type: string
+                    example: "123"
+        security:
+          - auth: []
+        responses:
+          200:
+            description: Sucesso
+            content:
+              application/json:
+                schema:
+                  type: object 
+          400:
+            description: Erro
+            content:
+              application/json:
+                schema:
+                  type: object                  
 components:
   schemas:
     responses:
