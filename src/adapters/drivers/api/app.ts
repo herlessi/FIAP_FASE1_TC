@@ -4,9 +4,11 @@ import AdminRepositoryPG from "../../drivens/repository/postgres/AdminRepository
 import CustomerRepositoryPG from "../../drivens/repository/postgres/CustomerRepositoryPG";
 import OrderRepositoryPG from "../../drivens/repository/postgres/OrderRepositoryPG";
 import PaymentRepositoryPG from "../../drivens/repository/postgres/PaymentRepositoryPG";
+import ProductRepositoryPG from "../../drivens/repository/postgres/ProductRepositoryPG";
 import UserRepositoryPG from "../../drivens/repository/postgres/UserRepositoryPG";
 import AdminAuthController from "./controllers/AdminAuthController";
 import AdminCustomerController from "./controllers/AdminCustomerController";
+import AdminProductController from "./controllers/AdminProductController";
 import AdminUserController from "./controllers/AdminUserController";
 import AuthController from "./controllers/AuthController";
 import CustomerController from "./controllers/CustomerController";
@@ -65,6 +67,11 @@ app.use('/admin/customer',require('./routes/adminCustomerRoute')(adminCustomerCt
 const adminUserRepo:IRepository = new UserRepositoryPG();
 const adminUsersCtrl:AdminUserController = new AdminUserController(adminUserRepo)
 app.use('/admin/users',require('./routes/adminUsersRoute')(adminUsersCtrl,adminAuthCtrl));
+
+
+const adminProdRepo:IRepository = new ProductRepositoryPG();
+const adminProdCtrl:AdminProductController = new AdminProductController(adminProdRepo)
+app.use('/admin/products',require('./routes/adminProductsRoute')(adminProdCtrl,adminAuthCtrl));
 
 // Inicia o servidor
 app.listen(PORT, () => {

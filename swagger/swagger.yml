@@ -786,7 +786,7 @@ paths:
       security:
         - auth: []
       parameters:
-        - name: product_id
+        - name: id
           in: query
           schema:
             type: number 
@@ -865,7 +865,7 @@ paths:
             schema:
               type: object
               properties:
-                product_id:
+                id:
                   type: number
                   example: "1"
                 category_id:
