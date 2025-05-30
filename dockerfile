@@ -8,9 +8,10 @@ RUN npm install
 
 COPY . /app
 
-RUN npm install -g nodemon
+# RUN npm install -g nodemon
+# RUN npm i knex
 
-ARG PORTA="8000"
+ARG PORTA="8080"
 ENV PORTA=$PORTA
 EXPOSE $PORTA
 
