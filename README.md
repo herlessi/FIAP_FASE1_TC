@@ -34,14 +34,15 @@ https://miro.com/app/board/uXjVI0-L25c=/?share_link_id=612145918677
 
 
 ## Como Executar
+1. Como docker instalado na sua maquina, execute: "docker compose up -d" e todos os componentes serão executados e ficarão prontos para ser usado
 
-1. Como docker instalado na sua maquina, execute: docker compose up -d e todos os componentes serão executados
-2. [OPCIONAL] Caso queira rodar somente o Backend: instale todas as dependencias rodando "npm i" e em então execute "npm run dev"
+## Serviços:
+Swagger: http://localhost:8081/swagger
+Backend: http://localhost:8080
+Banco: fiap_loja
 
 
 ## Autores
-
-- Autores
 - Nome: Herlessi Nogueira
 - Email: herlessi@gmail.com
 - Discord: herlessi
