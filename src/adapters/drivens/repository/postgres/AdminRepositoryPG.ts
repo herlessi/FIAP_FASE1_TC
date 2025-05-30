@@ -1,7 +1,7 @@
-import IAdminRepositoryPg from "../../../../core/application/ports/out/IAdminRepositoryPg";
+import IAdminRepository from "../../../../core/application/ports/out/IAdminRepository";
 const config = require('../../../../../knexfile.js');
 
-export default class AdminRepositoryPG implements IAdminRepositoryPg{
+export default class AdminRepositoryPG implements IAdminRepository{
     
     
     private dbpg = require('knex')(config.desenvolvimento);

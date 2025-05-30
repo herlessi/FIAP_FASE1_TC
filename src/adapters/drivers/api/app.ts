@@ -1,4 +1,6 @@
+import { INotification } from "../../../core/application/ports/out/INotification";
 import IRepository from "../../../core/application/ports/out/IRepository";
+import SenderEmail from "../../drivens/notification/SenderEmail";
 import CustomerRepositoryInMemory from "../../drivens/repository/inMemory/CustomerRepositoryInMemory";
 import AdminRepositoryPG from "../../drivens/repository/postgres/AdminRepositoryPG";
 import CustomerRepositoryPG from "../../drivens/repository/postgres/CustomerRepositoryPG";
@@ -56,8 +58,9 @@ const paymentctrl:PaymentController = new PaymentController(paymentrepo)
 app.use('/payment',require('./routes/paymentRoute')(paymentctrl,authCtrl));
 
 // orderrepo = aproveitando o repositorio do mesmo contexto
-const prodctrl:ProductionController = new ProductionController(orderrepo)
-app.use('/production',require('./routes/productionRoute')(prodctrl,authCtrl));
+const prodNotification:INotification = new SenderEmail()
+const prodctrl:ProductionController = new ProductionController(orderrepo,prodNotification)
+app.use('/production',require('./routes/productionRoute')(prodctrl,authCtrl,prodNotification));
 
 
 const adminCustomerRepo:IRepository = new CustomerRepositoryPG();

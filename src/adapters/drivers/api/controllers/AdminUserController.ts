@@ -21,7 +21,7 @@ export default class AdminUserController{
 
     async list(req:Request):any{
         let data = {}
-        console.log('params ',req.query)
+
         if(req.query) {
             data = req.query
         }

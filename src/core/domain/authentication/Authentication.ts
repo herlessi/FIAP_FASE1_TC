@@ -13,7 +13,6 @@ export default class Authentication {
     private JWT_SECRET:string = process.env.JWT_SECRET
 
     public async authorizate(token:string): Object {
-        console.log('token ',token)
         
 
         let retorno = {
