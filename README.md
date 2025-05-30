@@ -36,7 +36,7 @@ https://miro.com/app/board/uXjVI0-L25c=/?share_link_id=612145918677
 ## Como Executar
 
 1. Como docker instalado na sua maquina, execute: docker compose up -d e todos os componentes serão executados
-2. Caso queira rodar somente o Backend: instale todas as dependencias rodando "npm i" e em então execute "npm run dev"
+2. [OPCIONAL] Caso queira rodar somente o Backend: instale todas as dependencias rodando "npm i" e em então execute "npm run dev"
 
 
 ## Autores
