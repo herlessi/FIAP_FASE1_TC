@@ -9,7 +9,7 @@ export default class AdminRepositoryPG implements IAdminRepository{
     public async checkLogin(user: Object): Promise<Array<Object>> {
         return new Promise((resolve, reject) => {
            
-            console.log('user ',user)
+
             this.dbpg('users').select('*').where(user)
             .then((rows: any) => {
                 resolve(Array.from(rows));
