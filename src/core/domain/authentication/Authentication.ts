@@ -40,14 +40,13 @@ export default class Authentication {
         let user = new UserCostumer(null, name, null, null, 0, new Date(), new Date(), null, null)
         const customerservice = new CustomerSaveService(this.repo)
         let retorno = await customerservice.execute(user)
-        console.log('retorno ',retorno)
         return retorno
     }
 
     public async authenticate(data:Object): Promise<Object> {
 
         return new Promise(async (resolve, reject) => {
-            console.log('data ',data)
+
             const payload = data
             const expiresIn = '1h'
             let retorno = {

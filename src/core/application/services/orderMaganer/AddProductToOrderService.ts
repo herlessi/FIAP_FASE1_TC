@@ -18,7 +18,6 @@ export default class AddProductToOrderService implements IService<Object,Promise
             
                 const orderManager = new OrderManager(this.repo)
                 orderManager.addProductToOrder(data).then((result) => {
-                    console.log("Product added to order:", result); 
                     resolve(result);
                 }).catch((error) => {
                     console.error("Error adding product to order:", error); 

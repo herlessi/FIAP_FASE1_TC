@@ -17,8 +17,7 @@ export default class PaymentSaveService implements IService<Object,Promise<Array
 
             // return await this.repo.savePayment(data)
             this.repo.savePayment(data).then(resp =>{
-                console.log('resp', resp)
-                console.log('----')
+
                 if(resp?.length > 0 && resp[0].fl_status == 1){
 
                     const setStatusOrderService = new SetStatusOrderService(new OrderRepositoryPG())

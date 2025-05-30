@@ -18,7 +18,6 @@ export default class OrderManager {
                     if (order?.length > 0) {
 
                         this.repo.addProductToOrder({order_id: order[0].id,quantity:data.quantity, product_id: data.product_id}).then((result) => {
-                            console.log("Product added to existing order:", result);
                             resolve(result);
                         }).catch((error) => {
                             console.error("Error adding product to existing order:", error);
@@ -29,10 +28,8 @@ export default class OrderManager {
                         // No existing order, create a new one
                         return this.repo.createOrder(data.customer_id).then((newOrder) => {
                             // After creating a new order, add the product to it
-                            console.log("New order created:", newOrder);
                             if (newOrder?.length > 0) {
                                 this.repo.addProductToOrder({order_id: newOrder[0].id,quantity:data.quantity, product_id: data.product_id}).then((result) => {
-                                    console.log("Product added to new order:", result);
                                     resolve(result);
                                 }).catch((error) => {
                                     console.error("Error adding product to new order:", error);
@@ -65,7 +62,6 @@ export default class OrderManager {
                 if (order?.length > 0) {
 
                     this.repo.removeProductToOrder({order_id: order[0].id, product_id: data.product_id}).then((result) => {
-                        console.log("Product added to existing order:", result);
                         resolve(result);
                     }).catch((error) => {
                         console.error("Error adding product to existing order:", error);
@@ -91,8 +87,7 @@ export default class OrderManager {
         return new Promise((resolve, reject) => {
             
              this.repo.savePayment(data).then(resp =>{
-                console.log('resp', resp)
-                console.log('----')
+
                 if(resp?.length > 0 && resp[0].fl_status == 1){
                     const orderRepo = new OrderRepositoryPG()
                     orderRepo.setOrderStatus({order_id:data.order_id,fl_status:2}).then(resp2 =>{

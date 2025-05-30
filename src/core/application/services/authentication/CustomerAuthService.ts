@@ -51,28 +51,7 @@ export default class CostumerAuthService implements IService<Object,Object>{
 
         return retorno 
 
-        // console.log('data ',data)
-        // const payload = data
-        // const expiresIn = '1h'
-        // let retorno = {
-        //             status: 500,
-        //             message: "Erro ao gerar token"
-        //         }
-        // await jwt.sign(payload, this.JWT_SECRET, { expiresIn }, (err, token) => {
-        //     if (err) {
-        //         retorno = {
-        //             status: 500,
-        //             message: "Erro ao gerar token"
-        //         }
-        //     } else {
-        //         retorno = {
-        //             status: 200,
-        //             token: token
-        //         }
-        //     }
-        // })
-
-        // return retorno
+        
         
     }
 
