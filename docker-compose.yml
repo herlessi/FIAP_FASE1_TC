@@ -13,7 +13,6 @@ services:
       - /app/node_modules
     networks:
       - teste-bridge 
-    # command: "nodemon -L index.js"
     command: "npm run dev"
     depends_on:
       - banco
