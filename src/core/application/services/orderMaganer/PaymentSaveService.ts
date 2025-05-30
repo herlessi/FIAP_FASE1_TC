@@ -21,7 +21,7 @@ export default class PaymentSaveService implements IService<Object,Promise<Array
                 console.log('----')
                 if(resp?.length > 0 && resp[0].fl_status == 1){
 
-                    const setStatusOrderService = SetStatusOrderService(new OrderRepositoryPG())
+                    const setStatusOrderService = new SetStatusOrderService(new OrderRepositoryPG())
                     setStatusOrderService.execute({order_id:data.order_id,fl_status:2}).then(resp =>{
                         resolve(resp)
                     }).catch(error =>{

@@ -14,32 +14,37 @@ router.use((req:Request, res:Response, next:Function) => {
     authController.loginVerify(req,res,next)    
 })
 
+router.get('/orders', async (req:Request, res:Response) => {
+    let retorno = await productionController.listOrders(req) 
+    res.status(200).json(retorno)
+}); 
 
-router.get('/cancel/:order_id', async (req:Request, res:Response) => {
+
+router.delete('/cancel/:order_id', async (req:Request, res:Response) => {
     req.params.idstatus = 7
     let retorno = await productionController.setStatusOrder(req) 
     res.status(200).json(retorno)
 }); 
 
-router.get('/accept/:order_id', async (req:Request, res:Response) => {
+router.put('/accept/:order_id', async (req:Request, res:Response) => {
     req.params.idstatus = 3
     let retorno = await productionController.setStatusOrder(req) 
     res.status(200).json(retorno)
 }); 
 
-router.get('/preparation/:order_id', async (req:Request, res:Response) => {
+router.put('/preparation/:order_id', async (req:Request, res:Response) => {
     req.params.idstatus = 4
     let retorno = await productionController.setStatusOrder(req) 
     res.status(200).json(retorno)
 }); 
 
-router.get('/ready/:order_id', async (req:Request, res:Response) => {
+router.put('/ready/:order_id', async (req:Request, res:Response) => {
     req.params.idstatus = 5
     let retorno = await productionController.setStatusOrder(req) 
     res.status(200).json(retorno)
 }); 
 
-router.get('/finish/:order_id', async (req:Request, res:Response) => {
+router.put('/finish/:order_id', async (req:Request, res:Response) => {
     req.params.idstatus = 6
     let retorno = await productionController.setStatusOrder(req) 
     res.status(200).json(retorno)

@@ -1,4 +1,5 @@
 import IRepository from "../../../../core/application/ports/out/IRepository";
+import OrderListService from "../../../../core/application/services/adminManager/OrderListService";
 import OrderCategoryListService from "../../../../core/application/services/orderMaganer/OrderCategoryListService";
 import PaymentSaveService from "../../../../core/application/services/orderMaganer/PaymentSaveService";
 import SetStatusOrderService from "../../../../core/application/services/orderMaganer/setStatusOrderService";
@@ -23,6 +24,23 @@ export default class ProductionController{
             return retorno
 
         }
+    }
+
+    public async listOrders(req:Request):any{
+        let data = {}
+        if(req.query) {
+            data = req.query
+        }
+        if(!data.fl_status){
+            return {
+                status: 400,
+                message: "fl_status não informados"
+            }
+        }
+        
+        const orderListService = new OrderListService(this.repo)
+        let retorno = await orderListService.execute({fl_status:data.fl_status})
+        return retorno
     }
 
        

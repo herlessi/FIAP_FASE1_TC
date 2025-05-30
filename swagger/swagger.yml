@@ -304,9 +304,9 @@ paths:
                   order_id:
                     type: number
                     example: 1
-                  customer_id:
-                    type: number
-                    example: 1
+                  # customer_id:
+                  #   type: number
+                  #   example: 1
                   card_number:
                     type: string
                     example: "1111111111111111"
@@ -372,6 +372,58 @@ paths:
               application/json:
                 schema:
                   type: object                  
+  /auth/admin/login:
+    post:
+      summary: Login Administrativo
+      tags:
+        - Admin Manager - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "admin@email.com"
+                password:
+                  type: string
+                  example: "123456"                  
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Erro
+          content:
+            application/json:
+              schema:
+                type: object
+  /production/orders:
+    get:
+      summary: Listar Pedidos 
+      tags:
+        - Production
+      parameters:
+        - name: fl_status
+          in: query
+          required: true
+          schema:
+            type: number
+          description: ID da Ordem de Pedido
+          summary: 1	Registrado, 2	Pago, 3	Recebido, 4	Em Preparação, 5 Pronto, 6 Finalizado, 7 Cancelado
+      security:
+        - auth: []
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
   /production/cancel/{order_id}:
     put:
       summary: Cancela um pedido
@@ -477,36 +529,7 @@ paths:
             application/json:
               schema:
                 type: object
-  /auth/admin/login:
-    post:
-      summary: Login Administrativo
-      tags:
-        - Admin Manager - Auth
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                  example: "admin@email.com"
-                password:
-                  type: string
-                  example: "123456"                  
-      responses:
-        200:
-          description: Sucesso
-          content:
-            application/json:
-              schema:
-                type: object
-        400:
-          description: Erro
-          content:
-            application/json:
-              schema:
-                type: object
+
   /admin/customer:
     get:
       summary: Listar Clientes

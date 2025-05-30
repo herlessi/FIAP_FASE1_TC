@@ -1,5 +1,6 @@
 import IOrderRepository from "../../../../core/application/ports/out/IOrderRepository";
 import AUser from "../../../../core/domain/shared/Abstracts/AUser";
+import Helper from "../../../../core/domain/shared/Helper";
 const config = require('../../../../../knexfile.js');
 
 export default class OrderRepositoryPG implements IOrderRepository{
@@ -74,6 +75,8 @@ export default class OrderRepositoryPG implements IOrderRepository{
             });
         })
     }
+
+    
     
     listProductById(data: Object): Promise<Array<Object>> {
         return new Promise((resolve, reject) => {
@@ -180,6 +183,22 @@ export default class OrderRepositoryPG implements IOrderRepository{
                 resolve(Array.from(resp));
             }).catch((error: any) => {
                 console.error("Error creating order:", error); 
+                reject(false)
+            });
+        })
+    }
+
+    listOrders(data: Object): Promise<Array<Object>> {
+        return new Promise((resolve, reject) => {
+
+            let obj = Helper.cleanObject(data)
+            this.dbpg('order')
+                .join('customer','customer.id','order.customer_id')
+            .select('order.*','customer.name','customer.email').where(obj)
+            .then((rows: any) => {
+                resolve(Array.from(rows));
+            }).catch((error: any) => {
+                console.error("Error listing products by category:", error); 
                 reject(false)
             });
         })
