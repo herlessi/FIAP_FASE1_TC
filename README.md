@@ -37,7 +37,7 @@ https://miro.com/app/board/uXjVI0-L25c=/?share_link_id=612145918677
 1. Como docker instalado na sua maquina, execute: "docker compose up -d" e todos os componentes serão executados e ficarão prontos para ser usado
 
 ## Serviços:
-- Swagger: http://localhost:8081/swagger
+- Swagger: http://localhost:8081/swagger/
 - Backend: http://localhost:8080
 - Banco: fiap_loja
 
