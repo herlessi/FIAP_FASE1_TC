@@ -25,6 +25,14 @@ Todas os componentes do projetos são iniciados usando docker compose
 - Docker
 - Swagger
 
+## Diagramas
+Storytelling
+https://miro.com/app/board/uXjVIGJeGzM=/?share_link_id=664932554252
+
+Event Storming
+https://miro.com/app/board/uXjVI0-L25c=/?share_link_id=612145918677
+
+
 ## Como Executar
 
 1. Como docker instalado na sua maquina, execute: docker compose up -d e todos os componentes serão executados
