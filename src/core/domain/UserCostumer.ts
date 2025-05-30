@@ -23,7 +23,7 @@ export default class UserCostumer extends AUser{
 
     
     public get id(): number {
-        return this._id;
+        return this._id ?? null;
     }
 
     public set id(value: number) {
@@ -31,7 +31,7 @@ export default class UserCostumer extends AUser{
     }
 
     public get name(): string {
-        return this._name;
+        return this._name?? null;
     }
 
     public set name(value: string) {
@@ -39,7 +39,7 @@ export default class UserCostumer extends AUser{
     }
 
     public get email(): string {
-        return this._email;
+        return this._email?? null;
     }
 
     public set email(value: string) {
@@ -47,7 +47,7 @@ export default class UserCostumer extends AUser{
     }
 
     public get cpf(): string {
-        return this._cpf;
+        return this._cpf?? null;
     }
 
     public set cpf(value: string) {
@@ -55,7 +55,7 @@ export default class UserCostumer extends AUser{
     }
 
     public get state(): number {
-        return this._state;
+        return this._state?? null;
     }
 
     public set state(value: number) {
@@ -63,7 +63,7 @@ export default class UserCostumer extends AUser{
     }
 
     public get created_at(): Date {
-        return this._created_at;
+        return this._created_at?? null;
     }
 
     public set created_at(value: Date) {
@@ -71,7 +71,7 @@ export default class UserCostumer extends AUser{
     }
 
     public get updated_at(): Date {
-        return this._updated_at;
+        return this._updated_at?? null;
     }
 
     public set updated_at(value: Date) {
@@ -79,7 +79,7 @@ export default class UserCostumer extends AUser{
     }
 
     public get deleted_at(): Date {
-        return this._deleted_at;
+        return this._deleted_at?? null;
     }
 
     public set deleted_at(value: Date) {
@@ -87,7 +87,7 @@ export default class UserCostumer extends AUser{
     }
 
     public get token(): string {
-        return this._token;
+        return this._token?? null;
     }
 
     public set token(value: string) {

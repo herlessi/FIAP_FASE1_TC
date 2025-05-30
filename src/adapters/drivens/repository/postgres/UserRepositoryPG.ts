@@ -3,7 +3,7 @@ import AUser from "../../../../core/domain/shared/Abstracts/AUser";
 import Helper from "../../../../core/domain/shared/Helper";
 const config = require('../../../../../knexfile.js');
 
-export default class CustomerRepositoryPG implements IRepository{
+export default class UserRepositoryPG implements IRepository{
     
     
     private dbpg = require('knex')(config.desenvolvimento);
@@ -13,7 +13,7 @@ export default class CustomerRepositoryPG implements IRepository{
         let obj = Helper.cleanObject(user)
 
         return new Promise((resolve, reject) => {
-            this.dbpg('customer').insert(obj).returning('*')
+            this.dbpg('users').insert(obj).returning('*')
             .then((resp) => {
                 resolve(Array.from(resp));
             }).catch((error: any) => {
@@ -29,7 +29,7 @@ export default class CustomerRepositoryPG implements IRepository{
         let obj = Helper.cleanObject(user)
 
         return new Promise((resolve, reject) => {
-            this.dbpg('customer').update(obj).where({id:obj.id}).returning('*')
+            this.dbpg('users').update(obj).where({id:obj.id}).returning('*')
             .then((resp) => {
                 resolve(Array.from(resp));
             }).catch((error: any) => {
@@ -45,7 +45,7 @@ export default class CustomerRepositoryPG implements IRepository{
         let obj = Helper.cleanObject(user)
 
         return new Promise((resolve, reject) => {
-            this.dbpg('customer').update({fl_status:false}).where({id:obj.id}).returning('*')
+            this.dbpg('users').update({fl_status:false}).where({id:obj.id}).returning('*')
             .then((resp) => {
                 resolve(Array.from(resp));
             }).catch((error: any) => {
@@ -63,7 +63,7 @@ export default class CustomerRepositoryPG implements IRepository{
 
                 let obj = Helper.cleanObject(user)
             
-                this.dbpg('customer').select('*').where(obj)
+                this.dbpg('users').select('*').where(obj)
                 .then((rows: any) => {
                     resolve(Array.from(rows));
                 }).catch((error: any) => {
@@ -72,7 +72,7 @@ export default class CustomerRepositoryPG implements IRepository{
                 });
 
             }else{
-                this.dbpg('customer').select('*')
+                this.dbpg('users').select('*')
                 .then((rows: any) => {
                     resolve(Array.from(rows));
                 }).catch((error: any) => {

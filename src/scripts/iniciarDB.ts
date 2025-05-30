@@ -36,7 +36,7 @@ const iniciarDB = async () => {
 
             `)
 
-    await dbdev.raw(`CREATE TABLE IF NOT EXISTS public."user" (
+    await dbdev.raw(`CREATE TABLE IF NOT EXISTS public."users" (
                         id serial NOT NULL,
                         "name" varchar NULL,
                         email varchar NULL,
@@ -47,6 +47,10 @@ const iniciarDB = async () => {
                     );
 
             `)
+
+     await dbdev.raw(`INSERT INTO users(name,email,password)
+                        SELECT 'admin','admin@email.com','123456' WHERE NOT EXISTS (SELECT id FROM users WHERE name = 'admin')
+                    `)
 
 
     await dbdev.raw(`CREATE TABLE IF NOT EXISTS public."order" (

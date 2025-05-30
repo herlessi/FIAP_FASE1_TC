@@ -373,7 +373,7 @@ paths:
                 schema:
                   type: object                  
   /production/cancel/{order_id}:
-    get:
+    put:
       summary: Cancela um pedido
       tags:
         - Production
@@ -394,7 +394,7 @@ paths:
               schema:
                 type: object
   /production/accept/{order_id}:
-    get:
+    put:
       summary: Aceita um pedido
       tags:
         - Production
@@ -415,7 +415,7 @@ paths:
               schema:
                 type: object
   /production/preparation/{order_id}:
-    get:
+    put:
       summary: Pedido em preparação
       tags:
         - Production
@@ -436,7 +436,7 @@ paths:
               schema:
                 type: object
   /production/ready/{order_id}:
-    get:
+    put:
       summary: Marcar um pedido como pronto
       tags:
         - Production
@@ -457,7 +457,7 @@ paths:
               schema:
                 type: object
   /production/finish/{order_id}:
-    get:
+    put:
       summary: Finalizar um pedido
       tags:
         - Production
@@ -477,6 +477,445 @@ paths:
             application/json:
               schema:
                 type: object
+  /auth/admin/login:
+    post:
+      summary: Login Administrativo
+      tags:
+        - Admin Manager - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "admin@email.com"
+                password:
+                  type: string
+                  example: "123456"                  
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Erro
+          content:
+            application/json:
+              schema:
+                type: object
+  /admin/customer:
+    get:
+      summary: Listar Clientes
+      tags:
+        - Admin Manager - Customer
+      security:
+        - auth: []
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string 
+          description: id do cliente
+        - name: name
+          in: query
+          schema:
+            type: string 
+          description: nome do cliente
+        - name: email
+          in: query
+          schema:
+            type: string 
+          description: email do cliente
+        - name: cpf
+          in: query
+          schema:
+            type: string 
+          description: cpf do cliente                                    
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Erro
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      summary: Criar Novo Cliente
+      tags:
+        - Admin Manager - Customer
+      security:
+        - auth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "name"
+                email:
+                  type: string
+                  example: "email@email.com"                  
+                cpf:
+                  type: string
+                  example: "00000000000"                  
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Erro
+          content:
+            application/json:
+              schema:
+                type: object                
+    put:
+      summary: Atualizar Cliente
+      tags:
+        - Admin Manager - Customer
+      security:
+        - auth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                  example: "1"
+                name:
+                  type: string
+                  example: "name"
+                email:
+                  type: string
+                  example: "email@email.com"                  
+                cpf:
+                  type: string
+                  example: "00000000000"                  
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Erro
+          content:
+            application/json:
+              schema:
+                type: object 
+    delete:
+      summary: Desativar Cliente
+      tags:
+        - Admin Manager - Customer
+      security:
+        - auth: []
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: number
+          required: true
+          description: id do cliente       
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Erro
+          content:
+            application/json:
+              schema:
+                type: object                                
+  /admin/users:
+    get:
+      summary: Listar Usuario Admin
+      tags:
+        - Admin Manager - Users
+      security:
+        - auth: []
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string 
+          description: id do usuario
+        - name: name
+          in: query
+          schema:
+            type: string 
+          description: nome do usuario
+        - name: email
+          in: query
+          schema:
+            type: string 
+          description: email do usuario                                    
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Erro
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      summary: Criar Novo Usuario Admin
+      tags:
+        - Admin Manager - Users
+      security:
+        - auth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "name"
+                email:
+                  type: string
+                  example: "email@email.com"                  
+                password:
+                  type: string
+                  example: "******"                  
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Erro
+          content:
+            application/json:
+              schema:
+                type: object                
+    put:
+      summary: Atualizar Usuario Admin
+      tags:
+        - Admin Manager - Users
+      security:
+        - auth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: number
+                  example: "1"
+                name:
+                  type: string
+                  example: "name"
+                email:
+                  type: string
+                  example: "email@email.com"                  
+                password:
+                  type: string
+                  example: "******"              
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Erro
+          content:
+            application/json:
+              schema:
+                type: object 
+    delete:
+      summary: Desativar Usuario Admin
+      tags:
+        - Admin Manager - Users
+      security:
+        - auth: []
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: number
+          required: true
+          description: id do usuario       
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Erro
+          content:
+            application/json:
+              schema:
+                type: object     
+  /admin/products:
+    get:
+      summary: Listar Produtos
+      tags:
+        - Admin Manager - Products
+      security:
+        - auth: []
+      parameters:
+        - name: product_id
+          in: query
+          schema:
+            type: number 
+          description: id do produto
+        - name: category_id
+          in: query
+          schema:
+            type: number 
+          description: id da categoria
+        - name: name
+          in: query
+          schema:
+            type: string 
+          description: nome do produto
+        - name: price
+          in: query
+          schema:
+            type: number 
+          description: preço do usuario                                    
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Erro
+          content:
+            application/json:
+              schema:
+                type: object
+    post:
+      summary: Criar Novo Produtos
+      tags:
+        - Admin Manager - Products
+      security:
+        - auth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                category_id:
+                  type: number
+                  example: "1"
+                name:
+                  type: string
+                  example: "produto"                  
+                price:
+                  type: string
+                  example: "1.20"                  
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Erro
+          content:
+            application/json:
+              schema:
+                type: object                
+    put:
+      summary: Atualizar Produtos
+      tags:
+        - Admin Manager - Products
+      security:
+        - auth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                product_id:
+                  type: number
+                  example: "1"
+                category_id:
+                  type: number
+                  example: "1"
+                name:
+                  type: string
+                  example: "produto"                  
+                price:
+                  type: string
+                  example: "1.20"                
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Erro
+          content:
+            application/json:
+              schema:
+                type: object 
+    delete:
+      summary: Desativar Produtos
+      tags:
+        - Admin Manager - Products
+      security:
+        - auth: []
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: number
+          description: id do produto       
+      responses:
+        200:
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          description: Erro
+          content:
+            application/json:
+              schema:
+                type: object     
+
 components:
   schemas:
     responses:

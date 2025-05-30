@@ -1,8 +1,13 @@
 import IRepository from "../../../core/application/ports/out/IRepository";
 import CustomerRepositoryInMemory from "../../drivens/repository/inMemory/CustomerRepositoryInMemory";
+import AdminRepositoryPG from "../../drivens/repository/postgres/AdminRepositoryPG";
 import CustomerRepositoryPG from "../../drivens/repository/postgres/CustomerRepositoryPG";
 import OrderRepositoryPG from "../../drivens/repository/postgres/OrderRepositoryPG";
 import PaymentRepositoryPG from "../../drivens/repository/postgres/PaymentRepositoryPG";
+import UserRepositoryPG from "../../drivens/repository/postgres/UserRepositoryPG";
+import AdminAuthController from "./controllers/AdminAuthController";
+import AdminCustomerController from "./controllers/AdminCustomerController";
+import AdminUserController from "./controllers/AdminUserController";
 import AuthController from "./controllers/AuthController";
 import CustomerController from "./controllers/CustomerController";
 import OrderController from "./controllers/OrderController";
@@ -31,6 +36,10 @@ const authrepo:IRepository = new CustomerRepositoryPG()
 const authCtrl:AuthController = new AuthController(authrepo)
 app.use('/auth', require('./routes/authRoute')(authCtrl));
 
+const adminauthrepo:IRepository = new AdminRepositoryPG()
+const adminAuthCtrl:AdminAuthController = new AdminAuthController(adminauthrepo)
+app.use('/auth/admin', require('./routes/adminAuthRoute')(adminAuthCtrl));
+
 
 const repo:IRepository = new CustomerRepositoryPG();
 const ctrl:CustomerController = new CustomerController(repo)
@@ -47,6 +56,15 @@ app.use('/payment',require('./routes/paymentRoute')(paymentctrl,authCtrl));
 // orderrepo = aproveitando o repositorio do mesmo contexto
 const prodctrl:ProductionController = new ProductionController(orderrepo)
 app.use('/production',require('./routes/productionRoute')(prodctrl,authCtrl));
+
+
+const adminCustomerRepo:IRepository = new CustomerRepositoryPG();
+const adminCustomerCtrl:AdminCustomerController = new AdminCustomerController(adminCustomerRepo)
+app.use('/admin/customer',require('./routes/adminCustomerRoute')(adminCustomerCtrl,adminAuthCtrl));
+
+const adminUserRepo:IRepository = new UserRepositoryPG();
+const adminUsersCtrl:AdminUserController = new AdminUserController(adminUserRepo)
+app.use('/admin/users',require('./routes/adminUsersRoute')(adminUsersCtrl,adminAuthCtrl));
 
 // Inicia o servidor
 app.listen(PORT, () => {
