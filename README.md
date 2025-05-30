@@ -25,6 +25,10 @@ Todas os componentes do projetos são iniciados usando docker compose
 - Docker
 - Swagger
 
+## Videos
+Vídeo de Apresentação do youtube
+https://youtu.be/kWt2huRdhoY
+
 ## Diagramas
 Storytelling
 https://miro.com/app/board/uXjVIGJeGzM=/?share_link_id=664932554252
