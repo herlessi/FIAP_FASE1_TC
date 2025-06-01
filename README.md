@@ -13,7 +13,7 @@ Este repositório contém o Trabalho de Conclusão da Fase 1 do curso de Pós-Gr
 - Docker
 - A aplicação demora cerca de 1 minuto para ficar completamente online devido ao banco e criação automatica do banco
 - Todos os componentes do projetos são iniciados usando docker compose e levarão cerca de 1 minuto para todos os itens estarem devidamente online
-- Mais instruições na seção "Como Executar"
+- Mais instruções na seção "Como Executar"
 
 ## Tecnologias Utilizadas
 
