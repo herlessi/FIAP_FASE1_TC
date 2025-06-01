@@ -1,14 +1,11 @@
 const iniciarDB = async () => {
 
     const config = require('../../knexfile.js');
-    console.log("VAI CONECTAR")
     const dbinicial = require('knex')(config.inicial);
 
-    console.log("CONECTOU")
 
     await dbinicial.raw(`CREATE DATABASE fiap_loja`)
     .then((resp) => {
-        console.log(resp)
         console.log('Banco de dados criado com sucesso!');
         dbinicial.destroy();
     }).catch((err) => {

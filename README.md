@@ -11,9 +11,9 @@ Este repositório contém o Trabalho de Conclusão da Fase 1 do curso de Pós-Gr
 - Banco de dados Postgres
 - Foi criado um script de iniciação do banco de dados que roda automaticamente 10 segundo apos o deploy do backend.
 - Docker
-
-Todas os componentes do projetos são iniciados usando docker compose
-- docker compose up -d
+- A aplicação demora cerca de 1 minuto para ficar completamente online devido ao banco e criação automatica do banco
+- Todos os componentes do projetos são iniciados usando docker compose e levarão cerca de 1 minuto para todos os itens estarem devidamente online
+- Mais instruições na seção "Como Executar"
 
 ## Tecnologias Utilizadas
 
